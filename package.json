@@ -1,0 +1,26 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": " buisness owner wanting to view and manage, departments, roles, and employees",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wooopers/employee-tracker.git"
+  },
+  "keywords": [
+    "tracker"
+  ],
+  "author": "MIT",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wooopers/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/wooopers/employee-tracker#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4",
+    "mysql2": "^3.3.4"
+  }
+}
