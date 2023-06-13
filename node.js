@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 
-// Create the MySQL connection
+// Create the MySQL connection pool
 const connection = mysql.createPool({
   host: 'localhost',
   port: '3306',
