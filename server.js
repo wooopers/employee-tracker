@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Read the contents of the schema.sql file
-const schemaSQL = fs.readFileSync('schema.sql', 'utf8');
+const schemaSQL = fs.readFileSync('db/schema.sql', 'utf8');
 
 // MySQL connection pool
 const pool = mysql.createPool({

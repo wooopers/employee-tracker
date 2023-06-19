@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/wooopers/employee-tracker#readme",
   "dependencies": {
+    "express": "^4.18.2",
     "inquirer": "^8.2.5",
     "mysql2": "^3.4.0"
   }
