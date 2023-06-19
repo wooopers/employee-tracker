@@ -1,75 +1,42 @@
 const inquirer = require('inquirer');
 
-// Prompt the user with a menu of options
-function promptMenu() {
-    inquirer
-      .prompt([
-        {
-          type: 'list',
-          name: 'menuChoice',
-          message: 'Select an option:',
-          choices: ['View Students', 'Add Student', 'Exit']
-        }
-      ])
-      .then((answers) => {
-        const { menuChoice } = answers;
-        switch (menuChoice) {
-          case 'View Students':
-            viewStudents();
-            break;
-          case 'Add Student':
-            addStudent();
-            break;
-          case 'Exit':
-            exit();
-            break;
-          default:
-            console.log('Invalid choice');
-            promptMenu();
-        }
-      });
-  }
-  
-  // View all students
-  function viewStudents() {
-    db.query('SELECT * FROM students', function (err, results) {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      console.log(results);
-      promptMenu(); // Prompt the menu again after displaying the results
-    });
-  }
-  
-  // Add a student
-  function addStudent() {
-    inquirer
-      .prompt([
-        {
-          type: 'input',
-          name: 'name',
-          message: "Enter the student's name:"
-        },
-        {
-          type: 'input',
-          name: 'age',
-          message: "Enter the student's age:"
-        }
-      ])
-      .then((answers) => {
-        const { name, age } = answers;
-        // Perform the database insertion
-        db.query('INSERT INTO students (name, age) VALUES (?, ?)', [name, age], function (err, result) {
-          if (err) {
-            console.error(err);
-            return;
-          }
-          console.log('Student added successfully');
-          promptMenu(); // Prompt the menu again after adding the student
-        });
-      });
-  }
+inquirer
+  .prompt([
+    // Prompt options here
+  ])
+  .then((response) => {
+    // Check user's choice and invoke corresponding functions
+    switch (response.choice) {
+      case 'View Departments':
+        viewDepartments();
+        break;
+      case 'View Roles':
+        viewRoles();
+        break;
+      case 'Add Employee':
+        addEmployee();
+        break;
+      // Add more cases for other choices
+      default:
+        console.log('Invalid choice');
+    }
+  });
+
+// Function to view departments
+function viewDepartments() {
+  // Implementation here
+}
+
+// Function to view roles
+function viewRoles() {
+  // Implementation here
+}
+
+// Function to add an employee
+function addEmployee() {
+  // Implementation here
+}
+
   
   // Exit the application
   function exit() {

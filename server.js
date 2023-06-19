@@ -17,4 +17,9 @@ const db = mysql.createPool({
   console.log(`Connected to the classlist_db database.`);
 });
 
+// Use the routes defined in index.js
+app.use(routes);
 
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
