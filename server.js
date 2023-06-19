@@ -1,25 +1,49 @@
 const express = require('express');
 const mysql = require('mysql2');
+const fs = require('fs');
+const { connection, performDatabaseOperations } = require('./node');
 const routes = require('./index');
 
-const PORT = process.env.PORT || 3001;
 const app = express();
+const PORT = process.env.PORT || 3001;
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// Read the contents of the schema.sql file
+const schemaSQL = fs.readFileSync('schema.sql', 'utf8');
 
-const db = mysql.createPool({
+// MySQL connection pool
+const pool = mysql.createPool({
   host: 'localhost',
+  port: '3306',
   user: 'root',
-  password: '',
-  database: 'classlist_db'
-}, () => {
-  console.log(`Connected to the classlist_db database.`);
+  password: 'MyNewPass',
+  database: 'employee_tracker'
 });
 
-// Use the routes defined in index.js
-app.use(routes);
+// Connect to the MySQL database
+pool.getConnection((err, conn) => {
+  if (err) {
+    console.error('Error connecting to the database: ' + err.stack);
+    return;
+  }
+  console.log('Connected to the database.');
 
+  // Create the tables using SQL queries from schema.sql
+  conn.query(schemaSQL, (err) => {
+    if (err) {
+      console.error('Error creating tables: ' + err.stack);
+      conn.release();
+      return;
+    }
+    console.log('Tables created successfully.');
+
+    // Call functions to handle actions
+    performDatabaseOperations(conn);
+
+    conn.release();
+  });
+});
+
+// Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
